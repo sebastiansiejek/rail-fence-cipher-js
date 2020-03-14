@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "eslint": "^6.8.0",
+    "html-webpack-plugin": "^3.2.0",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-stylish": "^0.1.8"
+  },
+  "scripts": {
+    "start": "webpack --watch --mode development",
+    "build": "webpack --mode production"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --config .prettierrc --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.11"
+  }
+}
