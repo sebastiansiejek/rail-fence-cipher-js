@@ -2,33 +2,87 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        height: 100vh;
-        width: 100vw;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  form {
+    text-align: center;
+  }
+
+  .forms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3rem;
+  }
+
+  .form__button {
+    margin-top: 1rem;
+  }
+
+  input:not([type='button']) {
+    padding: 0.8rem;
+    text-align: center;
+  }
+
+  #result-container {
+    margin-top: 1rem;
+    text-align: center;
+  }
 </style>
 
 <body>
 
-    <form action="" id="encrypt-form">
-        <input type="text" name="text" id="text" placeholder="Text" value="kryptografia" required>
-        <input type="number" name="height" id="height" placeholder="Height" value="4" step="1" min="1" required>
-        <button type="submit">Encrypt</button>
-    </form>
+  <div class="forms">
 
-    <input type="text" id="encrypted" placeholder="Encrypted string" readonly>
+    <div>
+      <form action="" id="encrypt-form">
+        <h3>Encrypt</h3>
+        <input type="text" name="text" id="text" placeholder="Text" required />
+        <input type="number" name="height" id="height" placeholder="Height" step="1" min="1" required />
+        <div class="form__button"><button type="submit">Encrypt</button></div>
+
+        <div>
+          <label>
+            <h5>Result</h5>
+            <input type="text" class="result-input" readonly />
+          </label>
+        </div>
+      </form>
+    </div>
+
+    <div>
+
+      <form action="" id="decrypt-form">
+        <h3>Decrypt</h3>
+        <input type="text" name="text" id="text" placeholder="Text" required />
+        <input type="number" name="height" id="height" placeholder="Height" step="1" min="1" required />
+        <div class="form__button"><button type="submit">Decrypt</button></div>
+
+        <div>
+          <label>
+            <h5>Result</h5>
+            <input type="text" class="result-input" readonly />
+          </label>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
 
 </body>
 

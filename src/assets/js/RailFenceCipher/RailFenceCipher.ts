@@ -1,58 +1,48 @@
+import encrypt from './encrypt'
+import decrypt from './decrypt'
+
 export default class {
-  form: HTMLFormElement
-  resultElem: HTMLInputElement
-  text: string
-  height: number
+  encryptForm: HTMLFormElement
+  decryptForm: HTMLFormElement
 
   constructor() {
-    this.form = <HTMLFormElement>document.getElementById('encrypt-form')
-    this.resultElem = <HTMLInputElement>document.getElementById('encrypted')
+    this.encryptForm = <HTMLFormElement>document.getElementById('encrypt-form')
+    this.decryptForm = <HTMLFormElement>document.getElementById('decrypt-form')
     this.run()
   }
 
   run() {
-    if (this.form) {
-      this.handleForm()
-    }
+    this.handleEncrypt()
+    this.handleDecrypt()
   }
 
-  handleForm() {
-    this.form.addEventListener('submit', (e: any) => {
+  handleEncrypt() {
+    this.encryptForm.addEventListener('submit', (e: any) => {
       e.preventDefault()
+      const { target } = e
+      const formData = new FormData(target)
+
+      const text = formData.get('text') as string
+      const height = formData.get('height') as string
+
+      if (text && height) {
+        target.querySelector('.result-input').value = encrypt(text, parseInt(height))
+      }
+    })
+  }
+
+  handleDecrypt() {
+    this.decryptForm.addEventListener('submit', (e: any) => {
+      e.preventDefault()
+      const { target } = e
       const formData = new FormData(e.target)
 
       const text = formData.get('text') as string
       const height = formData.get('height') as string
 
       if (text && height) {
-        this.text = text
-        this.height = parseInt(height)
-        this.resultElem.value = this.encrypt(this.text, this.height)
+        target.querySelector('.result-input').value = decrypt(text, parseInt(height))
       }
     })
-  }
-
-  encrypt(text: string, height: number): string {
-    const textArray = text.split('')
-    const textArrayLength = textArray.length - 1
-    let matrix = []
-    let row = 0
-
-    for (let row = 0; row < height; row++) {
-      matrix[row] = []
-    }
-
-    let direction = 1
-    for (let i = 0; i <= textArrayLength; i++) {
-      matrix[row].push(textArray[i])
-
-      if ((row == height - 1 && direction == 1) || (row == 0 && direction == -1)) {
-        direction = -direction
-      }
-
-      row = row + direction
-    }
-
-    return matrix.flat().join('')
   }
 }
