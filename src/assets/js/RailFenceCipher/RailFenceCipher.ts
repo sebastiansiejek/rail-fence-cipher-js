@@ -27,7 +27,10 @@ export default class {
       const height = formData.get('height') as string
 
       if (text && height) {
-        target.querySelector('.result-input').value = encrypt(text, parseInt(height))
+        const { result, matrix } = encrypt(text, parseInt(height))
+        target.querySelector('.result-input').value = result
+        const drawContainer = document.getElementById('encrypt-drawing')
+        draw(drawContainer, matrix)
       }
     })
   }
@@ -42,10 +45,10 @@ export default class {
       const height = formData.get('height') as string
 
       if (text && height) {
-        const decrypted = decrypt(text, parseInt(height))
-        target.querySelector('.result-input').value = decrypted.result
+        const { result, matrix } = decrypt(text, parseInt(height))
+        target.querySelector('.result-input').value = result
         const drawContainer = document.getElementById('decrypt-drawing')
-        draw(drawContainer, decrypted.matrix)
+        draw(drawContainer, matrix)
       }
     })
   }

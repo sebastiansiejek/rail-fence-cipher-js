@@ -57,13 +57,17 @@
 
 <body>
 
+  <h1>
+    <center>RAIL FENCE CIPHER</center>
+  </h1>
+
   <div class="forms">
 
     <div>
       <form action="" id="encrypt-form">
         <h3>Encrypt</h3>
         <input type="text" name="text" id="text" placeholder="Text" required />
-        <input type="number" name="height" id="height" placeholder="Height" step="1" min="1" required />
+        <input type="number" name="height" id="height" placeholder="Height" step="1" min="2" required />
         <div class="form__button"><button type="submit">Encrypt</button></div>
 
         <div>
@@ -73,6 +77,9 @@
           </label>
         </div>
       </form>
+
+      <div id="encrypt-drawing" class="draw-result"></div>
+
     </div>
 
     <div>
@@ -80,7 +87,7 @@
       <form action="" id="decrypt-form">
         <h3>Decrypt</h3>
         <input type="text" name="text" id="text" placeholder="Text" required />
-        <input type="number" name="height" id="height" placeholder="Height" step="1" min="1" required />
+        <input type="number" name="height" id="height" placeholder="Height" step="1" min="2" required />
         <div class="form__button"><button type="submit">Decrypt</button></div>
 
         <div>

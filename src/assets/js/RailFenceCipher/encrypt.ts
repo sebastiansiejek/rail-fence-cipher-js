@@ -1,23 +1,41 @@
-export default (text: string, height: number): string => {
-  const textArray = text.split('')
-  const textArrayLength = textArray.length - 1
-  let matrix: any = []
-  let row = 0
+export default (text: string, height: number): { matrix: []; result: string } => {
+  const matrix: any = []
 
-  for (let row = 0; row < height; row++) {
-    matrix[row] = []
-  }
+  const textLength = text.length - 1
+  const heightLength = height - 1
 
-  let direction = 1
-  for (let i = 0; i <= textArrayLength; i++) {
-    matrix[row].push(textArray[i])
-
-    if ((row == height - 1 && direction == 1) || (row == 0 && direction == -1)) {
-      direction = -direction
+  //set empty matrix
+  for (let i = 0; i <= heightLength; i++) {
+    matrix[i] = []
+    for (let j = 0; j <= textLength; j++) {
+      matrix[i][j] = '*'
     }
-
-    row = row + direction
   }
 
-  return matrix.flat().join('')
+  let dirDown = false
+  let row = 0
+  let col = 0
+
+  for (let i = 0; i <= textLength; i++) {
+    if (row == 0 || row == heightLength) dirDown = !dirDown
+
+    matrix[row][col] = text[i]
+    col += 1
+
+    if (dirDown) row += 1
+    else row -= 1
+  }
+
+  const result: any = []
+
+  for (let i = 0; i <= heightLength; i++) {
+    for (let j = 0; j <= textLength; j++) {
+      if (matrix[i][j] != '*') result.push(matrix[i][j])
+    }
+  }
+
+  return {
+    matrix: matrix,
+    result: result.flat().join('')
+  }
 }
