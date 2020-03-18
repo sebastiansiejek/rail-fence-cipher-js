@@ -12,19 +12,19 @@ export default (decryptedText: string, height: number): { matrix: []; result: st
     }
   }
 
-  let dir_down = false
+  let dirDown = false
   let row = 0
   let col = 0
 
   // fill * in matrix
   for (let i = 0; i <= textLength; i++) {
-    if (row == 0) dir_down = true
-    if (row == heightLength) dir_down = false
+    if (row == 0) dirDown = true
+    if (row == heightLength) dirDown = false
 
     matrix[row][col] = '*'
     col += 1
 
-    if (dir_down) row += 1
+    if (dirDown) row += 1
     else row -= 1
   }
 
@@ -45,13 +45,13 @@ export default (decryptedText: string, height: number): { matrix: []; result: st
   col = 0
 
   for (let i = 0; i <= textLength; i++) {
-    if (row == 0) dir_down = true
-    if (row == heightLength) dir_down = false
+    if (row == 0) dirDown = true
+    if (row == heightLength) dirDown = false
 
     if (matrix[row][col] != '*') result.push(matrix[row][col])
     col += 1
 
-    if (dir_down) row += 1
+    if (dirDown) row += 1
     else row -= 1
   }
 
