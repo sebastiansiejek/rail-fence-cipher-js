@@ -1,4 +1,4 @@
-export default (decryptedText: string, height: number): string => {
+export default (decryptedText: string, height: number): { matrix: []; result: string } => {
   const matrix: any = []
 
   const textLength = decryptedText.length - 1
@@ -55,5 +55,8 @@ export default (decryptedText: string, height: number): string => {
     else row -= 1
   }
 
-  return result.flat().join('')
+  return {
+    matrix: matrix,
+    result: result.flat().join('')
+  }
 }
