@@ -1,5 +1,6 @@
 import encrypt from './encrypt'
 import decrypt from './decrypt'
+import draw from './draw'
 
 export default class {
   encryptForm: HTMLFormElement
@@ -41,7 +42,10 @@ export default class {
       const height = formData.get('height') as string
 
       if (text && height) {
-        target.querySelector('.result-input').value = decrypt(text, parseInt(height))
+        const decrypted = decrypt(text, parseInt(height))
+        target.querySelector('.result-input').value = decrypted.result
+        const drawContainer = document.getElementById('decrypt-drawing')
+        draw(drawContainer, decrypted.matrix)
       }
     })
   }
