@@ -19,6 +19,12 @@ form {
   grid-gap: 3rem;
 }
 
+@media (max-width: 700px) {
+  .forms {
+    grid-template-columns: 1fr;
+  }
+}
+
 .form__button {
   margin-top: 1rem;
 }
