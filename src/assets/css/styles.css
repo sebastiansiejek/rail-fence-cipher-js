@@ -29,10 +29,11 @@ form button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 5vw;
+  padding-bottom: 5vh;
 }
 
 @media (max-width: 700px) {
-  .forms {
+  .container {
     grid-template-columns: 1fr;
   }
 }
@@ -55,4 +56,19 @@ input:not([type='button']) {
 
 .draw-result span {
   padding: 0.3rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  padding: 1rem;
+  background: #3ceab8;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  color: #343434;
 }
