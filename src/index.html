@@ -1,61 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= htmlWebpackPlugin.options.title %></title>
-</head>
+  <body>
+    <h1>
+      <center>RAIL FENCE CIPHER</center>
+    </h1>
 
-<body>
+    <div class="forms">
+      <div>
+        <form action="" id="encrypt-form">
+          <h3>Encrypt</h3>
 
-  <h1>
-    <center>RAIL FENCE CIPHER</center>
-  </h1>
+          <input type="text" name="text" id="text" placeholder="Text" required />
+          <input type="number" name="height" id="height" placeholder="Height" step="1" min="2" required />
 
-  <div class="forms">
+          <div class="form__button"><button type="submit">Encrypt</button></div>
 
-    <div>
-      <form action="" id="encrypt-form">
-        <h3>Encrypt</h3>
-        <input type="text" name="text" id="text" placeholder="Text" required />
-        <input type="number" name="height" id="height" placeholder="Height" step="1" min="2" required />
-        <div class="form__button"><button type="submit">Encrypt</button></div>
+          <div>
+            <label>
+              <h5>Result</h5>
+              <input type="text" class="result-input" readonly />
+            </label>
+          </div>
+        </form>
 
-        <div>
-          <label>
-            <h5>Result</h5>
-            <input type="text" class="result-input" readonly />
-          </label>
-        </div>
-      </form>
+        <div id="encrypt-drawing" class="draw-result"></div>
+      </div>
 
-      <div id="encrypt-drawing" class="draw-result"></div>
+      <div>
+        <form action="" id="decrypt-form">
+          <h3>Decrypt</h3>
+          <input type="text" name="text" id="text" placeholder="Text" required />
+          <input type="number" name="height" id="height" placeholder="Height" step="1" min="2" required />
+          <div class="form__button"><button type="submit">Decrypt</button></div>
 
+          <div>
+            <label>
+              <h5>Result</h5>
+              <input type="text" class="result-input" readonly />
+            </label>
+          </div>
+        </form>
+
+        <div id="decrypt-drawing" class="draw-result"></div>
+      </div>
     </div>
 
-    <div>
-
-      <form action="" id="decrypt-form">
-        <h3>Decrypt</h3>
-        <input type="text" name="text" id="text" placeholder="Text" required />
-        <input type="number" name="height" id="height" placeholder="Height" step="1" min="2" required />
-        <div class="form__button"><button type="submit">Decrypt</button></div>
-
+    <form action="" id="file-form">
+      <label>
+        <div>Attach .txt file for decrypt {word height}</div>
+        <input type="file" name="file" accept=".txt" />
         <div>
           <label>
-            <h5>Result</h5>
-            <input type="text" class="result-input" readonly />
+            Encrypt
+            <input type="radio" name="type" value="encrypt" checked required />
+          </label>
+          <label>
+            Decrypt
+            <input type="radio" name="type" value="decrypt" required />
           </label>
         </div>
-      </form>
-
-      <div id="decrypt-drawing" class="draw-result"></div>
-
-    </div>
-
-  </div>
-
-</body>
-
+      </label>
+      <div class="form__button"><button type="submit">Send</button></div>
+    </form>
+  </body>
 </html>
