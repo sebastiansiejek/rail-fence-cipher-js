@@ -4,54 +4,34 @@ import draw from './draw'
 import file from './file'
 
 export default class {
-  encryptForm: HTMLFormElement
-  decryptForm: HTMLFormElement
+  cipherForm: HTMLFormElement
   fileForm: HTMLFormElement
 
   constructor() {
-    this.encryptForm = <HTMLFormElement>document.getElementById('encrypt-form')
-    this.decryptForm = <HTMLFormElement>document.getElementById('decrypt-form')
+    this.cipherForm = <HTMLFormElement>document.getElementById('cipher-form')
     this.fileForm = <HTMLFormElement>document.getElementById('file-form')
     this.run()
   }
 
   run() {
     this.handleEncrypt()
-    this.handleDecrypt()
     this.handleFileForm()
   }
 
   handleEncrypt() {
-    this.encryptForm.addEventListener('submit', (e: any) => {
+    this.cipherForm.addEventListener('submit', (e: any) => {
       e.preventDefault()
       const { target } = e
       const formData = new FormData(target)
 
       const text = formData.get('text') as string
       const height = formData.get('height') as string
+      const type = formData.get('type') as string
 
-      if (text && height) {
-        const { result, matrix } = encrypt(text, parseInt(height))
+      if (text && height && type) {
+        const { result, matrix } = type == 'encrypt' ? encrypt(text, parseInt(height)) : decrypt(text, parseInt(height))
         target.querySelector('.result-input').value = result
-        const drawContainer = document.getElementById('encrypt-drawing')
-        draw(drawContainer, matrix)
-      }
-    })
-  }
-
-  handleDecrypt() {
-    this.decryptForm.addEventListener('submit', (e: any) => {
-      e.preventDefault()
-      const { target } = e
-      const formData = new FormData(e.target)
-
-      const text = formData.get('text') as string
-      const height = formData.get('height') as string
-
-      if (text && height) {
-        const { result, matrix } = decrypt(text, parseInt(height))
-        target.querySelector('.result-input').value = result
-        const drawContainer = document.getElementById('decrypt-drawing')
+        const drawContainer = document.getElementById('cipher-drawing')
         draw(drawContainer, matrix)
       }
     })
