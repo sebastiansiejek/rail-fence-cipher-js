@@ -40,8 +40,60 @@ export default class {
   handleFileForm() {
     this.fileForm.addEventListener('submit', (e: any) => {
       e.preventDefault()
-      const fromData = new FormData(this.fileForm)
-      file.sendRequest(fromData).then(res => console.log(res))
+      const formData = new FormData(this.fileForm)
+
+      const arr: any = []
+
+      return file.sendRequest(formData).then(res => {
+        const { result } = res
+        const { type, data } = result
+        if (type == 'SUCCESS') {
+          const cipherKind = formData.get('type') as string
+
+          data.forEach((line: { word: string; height: number }) => {
+            const { word, height } = line
+            if (cipherKind == 'encrypt') arr.push({ ...encrypt(word, height), word, height })
+            if (cipherKind == 'decrypt') arr.push({ ...decrypt(word, height), word, height })
+          })
+
+          if (e.target.querySelector('.result')) e.target.querySelector('.result').remove()
+
+          const resultElem = document.createElement('div')
+          resultElem.className = 'result'
+          e.target.appendChild(resultElem)
+
+          const tableElem = document.createElement('table')
+          tableElem.innerHTML = `
+            <table>
+              <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>Word</th>
+                  <th>Height</th>
+                  <th>Result</th>
+                  <th>Drawing</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          `
+
+          arr.forEach((a: any, key: number) => {
+            const singleElem = document.createDocumentFragment()
+
+            tableElem.querySelector('tbody').innerHTML += `
+              <td>${key + 1}</td>
+              <td>${a.word}</td>
+              <td>${a.height}</td>
+              <td>${a.result}</td>
+              <td class="table__drawing"></td>
+            `
+            singleElem.appendChild(tableElem)
+            resultElem.appendChild(singleElem)
+            draw(e.target.querySelector(`table tbody tr:nth-child(${key + 1}) .table__drawing`), a.matrix)
+          })
+        }
+      })
     })
   }
 }

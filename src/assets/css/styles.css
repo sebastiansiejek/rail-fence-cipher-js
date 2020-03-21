@@ -31,11 +31,29 @@ form button {
   grid-gap: 5vw;
 }
 
+table {
+  margin-top: .5rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #000;
+}
+
+table td,
+table th {
+  padding: .5rem;
+}
+
 @media (max-width: 700px) {
   .forms {
     grid-template-columns: 1fr;
   }
 }
+
 input:not([type='button']) {
   padding: 0.8rem;
   text-align: center;
