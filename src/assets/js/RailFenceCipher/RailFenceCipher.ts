@@ -1,20 +1,24 @@
 import encrypt from './encrypt'
 import decrypt from './decrypt'
 import draw from './draw'
+import file from './file'
 
 export default class {
   encryptForm: HTMLFormElement
   decryptForm: HTMLFormElement
+  fileForm: HTMLFormElement
 
   constructor() {
     this.encryptForm = <HTMLFormElement>document.getElementById('encrypt-form')
     this.decryptForm = <HTMLFormElement>document.getElementById('decrypt-form')
+    this.fileForm = <HTMLFormElement>document.getElementById('file-form')
     this.run()
   }
 
   run() {
     this.handleEncrypt()
     this.handleDecrypt()
+    this.handleFileForm()
   }
 
   handleEncrypt() {
@@ -50,6 +54,14 @@ export default class {
         const drawContainer = document.getElementById('decrypt-drawing')
         draw(drawContainer, matrix)
       }
+    })
+  }
+
+  handleFileForm() {
+    this.fileForm.addEventListener('submit', (e: any) => {
+      e.preventDefault()
+      const fromData = new FormData(this.fileForm)
+      file.sendRequest(fromData).then(res => console.log(res))
     })
   }
 }
